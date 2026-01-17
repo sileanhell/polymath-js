@@ -2,7 +2,14 @@
   "name": "polymath",
   "type": "module",
   "scripts": {
-    "dev": "bun --watch src/main.ts"
+    "dev": "bun --watch src/main.ts",
+    "build:linux:x64": "bun build --compile --target=bun-linux-x64 ./src/main.ts --outfile build/linux-x64",
+    "build:linux:arm64": "bun build --compile --target=bun-linux-arm64 ./src/main.ts --outfile build/linux-arm64",
+    "build:linux:x64:musl": "bun build --compile --target=bun-linux-x64-musl ./src/main.ts --outfile build/linux-x64-musl",
+    "build:linux:arm64:musl": "bun build --compile --target=bun-linux-arm64-musl ./src/main.ts --outfile build/linux-arm64-musl",
+    "build:windows:x64": "bun build --compile --target=bun-windows-x64 ./src/main.ts --outfile build/windows-x64",
+    "build:darwin:x64": "bun build --compile --target=bun-darwin-x64 ./src/main.ts --outfile build/darwin-x64",
+    "build:darwin:arm64": "bun build --compile --target=bun-darwin-arm64 ./src/main.ts --outfile build/darwin-arm64"
   },
   "devDependencies": {
     "@types/bun": "latest"

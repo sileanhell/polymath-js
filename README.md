@@ -25,12 +25,11 @@
 
 3. Запустите бинарник.
 4. Настройте доступ по HTTPS (nginx + certbot, caddy и т.д.).
-   > [!CAUTION]
    > **Плагин не будет работать без HTTPS.**
-5. В конфигурации плагина укажите домен и секрет в формате `SECRET_KEY` + уникальный суффикс сервера:
+6. В конфигурации плагина укажите домен и секрет в формате `SECRET_KEY` + уникальный суффикс сервера:
    ```yaml
    polymath:
      server: pack.example.com
      secret: USXJKJBzJrz2xLPCqRWTf4z1-survival
    ```
-6. Запустите Minecraft-сервер.
+7. Запустите Minecraft-сервер.

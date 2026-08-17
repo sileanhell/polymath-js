@@ -1,32 +1,36 @@
 # Polymath-js
 
-Это порт проекта [Polymath](https://github.com/oraxen/polymath) на Bun.sh + Elysia.
+Это форк проекта [Polymath](https://github.com/oraxen/polymath) переписанный на Bun.sh + Elysia.
 Совместим с [oraxen](https://oraxen.com/) и [nexo](https://nexomc.com/).
 
-> [!IMPORTANT]
-> Используйте **1 бинарник на 1 Minecraft-сервер**. 
-> Не подключайте несколько серверов к одному хранилищу.
+> [!NOTE]
+> Один экземпляр polymath-js может обслуживать **несколько Minecraft-серверов**.
+> Отдельный инстанс на каждый сервер не нужен.
 
 ## Быстрый старт
 
 1. Скачайте бинарник из [релизов](https://github.com/sileanhell/polymath-js/releases)
 2. Создайте файл `.env` рядом с бинарником:
+
    ```env
-   PORT=          # Порт сервера
-   DOMAIN=        # Домен или IP куда будет обращаться игрок сервера для скачивания текстурпака (пример: pack.example.com)
-   SECRET_KEY=    # Ключ для загрузки текстурпаков на сервер
+   # Порт сервера
+   PORT=3000
+
+   # Домен или IP куда будет обращаться игрок сервера для скачивания текстурпака
+   DOMAIN=packs.example.com
+
+   # Общий префикс ключа. Не используйте его как secret плагина целиком
+   SECRET_KEY=USXJKJBzJrz2xLPCqRWTf4z1
    ```
+
 3. Запустите бинарник.
 4. Настройте доступ по HTTPS (nginx + certbot, caddy и т.д.).
-> [!CAUTION]
-> **Плагин не будет работать без HTTPS.**
-5. Обновите ссылку и секретный ключ в конфигурации плагина:
+   > [!CAUTION]
+   > **Плагин не будет работать без HTTPS.**
+5. В конфигурации плагина укажите домен и секрет в формате `SECRET_KEY` + уникальный суффикс сервера:
    ```yaml
    polymath:
      server: pack.example.com
-     secret: USXJKJBzJrz2xLPCqRWTf4z1PKMJ7PD6
+     secret: USXJKJBzJrz2xLPCqRWTf4z1-survival
    ```
 6. Запустите Minecraft-сервер.
-
-## Вклад в проект
-Если вы считаете, что нужно дополнить функционал, создавайте форки этого репозитория, чтобы другие могли найти вас через вкладку форков.

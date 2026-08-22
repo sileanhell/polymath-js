@@ -1,5 +1,5 @@
 import { Elysia, status, t } from "elysia";
-import { mkdir } from "fs/promises";
+import { mkdir, unlink } from "fs/promises";
 import { join } from "path";
 
 if (!process.env.DOMAIN || !process.env.SECRET_KEY || !process.env.PORT) throw new Error("Missing required environment variables.");
@@ -29,8 +29,11 @@ server.post(
     if (!server) return status(403, "Forbidden");
     server = Bun.hash(server).toString();
 
+    const destPath = join(packsFolder, server);
+    await unlink(destPath).catch(() => {});
+
     const hasher = new Bun.CryptoHasher("sha1");
-    const writer = Bun.file(join(packsFolder, server)).writer();
+    const writer = Bun.file(destPath).writer();
     const reader = body.pack.stream().getReader();
 
     while (true) {
@@ -42,6 +45,7 @@ server.post(
     }
 
     await writer.end();
+
     return { url: `https://${process.env.DOMAIN}/download?server=${server}`, sha1: hasher.digest("hex") };
   },
   { body: t.Object({ id: t.String(), pack: t.File() }) },

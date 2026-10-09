@@ -52,7 +52,7 @@ server.post(
 );
 
 try {
-  server.listen(Number(process.env.PORT));
+  server.listen({ hostname: "127.0.0.1", port: Number(process.env.PORT) });
   console.log(`Server started at ${server.server?.url}`);
 } catch (error) {
   console.log("Failed to start server:");
